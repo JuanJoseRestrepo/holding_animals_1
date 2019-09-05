@@ -92,6 +92,12 @@ public class Owner implements Comparable<Owner>,Comparator<Owner>  {
 	public String toString() {
 	String msj = "";
 	
+	msj += "El id del Owner:" + idOwner + " "; 
+	msj += "El nombre del dueño es:" + ownerNames + " "; 
+	msj += "El segundo nombre es:" + ownerSecondNames + " "; 
+	msj += "El tipo de animal preferido es:" + typeOfAnimalsPrefer + " "; 
+	msj += "El dia de nacimiento es:" + bornDay + " "; 
+	
 	return msj;
 	}
 

@@ -141,10 +141,11 @@ public class Holding implements Serializable{
 		BufferedReader br = new BufferedReader(fr);
 		
 		String a;
-		while((a =br.readLine()) != null){
+		int j = 0;
+		while((a =br.readLine()) != null && j < 1){
 			String[] b = a.split(",");
 			clubsitos.add(new Club(b[0], b[1], b[2], b[3]));
-			
+			j++;
 		}
 		br.close();
 		
@@ -236,17 +237,21 @@ public class Holding implements Serializable{
 
 public void loadOwner(){
 	
-	ArrayList<Owner> ownersitos = new ArrayList<Owner>();
 	File fl = new File("Ownersitos.csv");
 	
 	try {
 	FileReader fi = new FileReader(fl.getAbsoluteFile());
 	BufferedReader br = new BufferedReader(fi);
 	String br1;
-	while((br1 = br.readLine()) != null) {	
+	for(Club miClub:clubs) {
+	int j = 0;
+	while((br1 = br.readLine()) != null && j < 1) {
+		
 		String[] b = br1.split(",");
-		ownersitos.add(new Owner(b[0],b[1],b[2],b[3],b[4]));
+		miClub.getOwners().add(new Owner(b[0],b[1],b[2],b[3],b[4]));
+		j++;
 	}
+}
 	br.close();
 	
 	} catch (FileNotFoundException e) {
@@ -255,29 +260,29 @@ public void loadOwner(){
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	int j = 0;
-	for(Club miClub:clubs){
-		for(int k = 0; k < 1000;k++) {
-			miClub.addOwners(ownersitos.get(j).getIdOwner(),ownersitos.get(j).getOwnerNames(),ownersitos.get(j).getOwnerSecondNames(),ownersitos.get(j).getTypeOfAnimalsPrefer(),ownersitos.get(j).getBornDay());
-			j++;
-		}	
-	}
 	
 }
 
 public void loadPet(){
 
-	ArrayList<Pet> pets = new ArrayList<Pet>();
 	File fl = new File("Pets.csv");
 	
 	try {
 	FileReader fi = new FileReader(fl.getAbsoluteFile());
 	BufferedReader br = new BufferedReader(fi);
-	String a = br.readLine();
-	while(a != null) {
-		String[] b = a.split(",");
-		pets.add(new Pet(b[0],b[1],b[2],b[3],b[4]));
-		a = br.readLine();
+	
+	for(Club clubsitos:clubs) {
+		for(Owner owner: clubsitos.getOwners()) {
+			int j = 0;
+			String a = br.readLine();
+			while(a != null && j < 1) {
+				String[] b = a.split(",");
+				owner.getPets().add(new Pet(b[0],b[1],b[2],b[3],b[4]));
+				a = br.readLine();
+				j++;
+		}
+	}
+
 	}
 	br.close();
 	
@@ -290,19 +295,29 @@ public void loadPet(){
 		e.printStackTrace();
 	}
 	
-	int j = 0;
-	for(Club miClub:clubs){
-		for(Owner owner: miClub.getOwners()) {
-			int x = (int) ((Math.random() *9) + 1);
-			for(int i = 0; i < x;i++) {
-				owner.addAnimals(pets.get(j).getIdPet(),pets.get(j).getPetName(),pets.get(j).getGender(),pets.get(j).getTypeOfPet(),pets.get(j).getBornPetDay());
-				j++;
+	/**
+	System.out.println("---------PRIMERO----------");
+	for(Club clubsitos:clubs) {
+		System.out.println("------------------------");
+		System.out.println(clubsitos.toString());
+		System.out.println("------------------------");
+		for(Owner owner: clubsitos.getOwners()) {
+			System.out.println("////////////////////////////");
+			System.out.println(owner.toString());
+			System.out.println("////////////////////////////");
+			for(Pet pet: owner.getPets()) {
+				System.out.println("*************************");
+				System.out.println(pet.toString());
+				System.out.println("*************************");
+				
 			}
-			
 		}
 	}
+	System.out.println("---------FINAL----------");
+	*/
 			
-	}
+}
+		
 
 public void ordenateTypeOfAnimals() {
 	for(int i = 0; i < clubs.size();i++) {

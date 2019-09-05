@@ -66,6 +66,13 @@ public class Pet implements Comparable<Pet>,Comparator<Pet>  {
 	public String toString() {
 		String msj = "";
 		
+		msj+= "El id del dueño: " + " " + idPet + " ";
+		msj+= "El nombre del Animalito es: " + " " + petName+ " ";
+		msj+= "El genero es: " + " " + gender+ " ";
+		msj+= "El tipo de animal es: " + " " + typeOfPet+ " ";
+		msj+= "La fecha de su cumpleaños es: " + " " + bornPetDay+ " ";
+		
+	
 		return msj;
 	}
 
