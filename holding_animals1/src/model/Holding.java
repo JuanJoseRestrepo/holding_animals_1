@@ -141,11 +141,9 @@ public class Holding implements Serializable{
 		BufferedReader br = new BufferedReader(fr);
 		
 		String a;
-		int j = 0;
-		while((a =br.readLine()) != null && j < 1){
+		while((a =br.readLine()) != null){
 			String[] b = a.split(",");
 			clubsitos.add(new Club(b[0], b[1], b[2], b[3]));
-			j++;
 		}
 		br.close();
 		
@@ -245,7 +243,7 @@ public void loadOwner(){
 	String br1;
 	for(Club miClub:clubs) {
 	int j = 0;
-	while((br1 = br.readLine()) != null && j < 1) {
+	while((br1 = br.readLine()) != null && j < 100) {
 		
 		String[] b = br1.split(",");
 		miClub.getOwners().add(new Owner(b[0],b[1],b[2],b[3],b[4]));
@@ -275,7 +273,7 @@ public void loadPet(){
 		for(Owner owner: clubsitos.getOwners()) {
 			int j = 0;
 			String a = br.readLine();
-			while(a != null && j < 1) {
+			while(a != null && j < 100) {
 				String[] b = a.split(",");
 				owner.getPets().add(new Pet(b[0],b[1],b[2],b[3],b[4]));
 				a = br.readLine();

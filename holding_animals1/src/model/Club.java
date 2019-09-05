@@ -41,6 +41,7 @@ public class Club implements Serializable, Comparable<Club>,Comparator<Club> {
 		this.creationDate = creationDate;
 		this.typeOfAnimals = typeOfAnimals;
 		owners = loadObjectsOwnerAndPets();
+		saveObjectsInFileOwners();
 	
 	}
 	
@@ -138,12 +139,17 @@ public class Club implements Serializable, Comparable<Club>,Comparator<Club> {
 	 * 
 	 */
 	public void saveObjectsInFileOwners() {
-		File fl = new File("Owners.txt");
+		File fl = new File("Ownersit.txt");
 		
 		try {
-			FileOutputStream file = new FileOutputStream(fl.getAbsoluteFile());
+			System.out.println("--------------------");
+			FileOutputStream file = new FileOutputStream(fl.getAbsolutePath());
 			ObjectOutputStream ob = new ObjectOutputStream(file);
-			ob.writeObject(owners);
+			for(Owner owner: owners) {
+				System.out.println("-------"+ owners.toString());
+				ob.writeObject(owners.toString());
+			}
+
 			ob.close();
 		}catch(IOException e) {
 			System.out.println("No se pudo leer");
@@ -156,7 +162,7 @@ public class Club implements Serializable, Comparable<Club>,Comparator<Club> {
 	public ArrayList<Owner> loadObjectsOwnerAndPets() {
 		File fl = new File("Ownerss.txt");
 		
-		if(!fl.isFile()) {
+		if(!fl.isFile()) { 
 			owners = new ArrayList<Owner>();
 		}else {
 			try {
